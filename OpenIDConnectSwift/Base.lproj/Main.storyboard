@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Okta App Auth-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="OktaAppAuth" customModule="OpenIDConnectSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tvZ-5W-xR0">
+                                <rect key="frame" x="102" y="20" width="304" height="467"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Rb4-SV-Y14">
+                                        <rect key="frame" x="2" y="0.0" width="300" height="149"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="okta_logo" translatesAutoresizingMaskIntoConstraints="NO" id="nyl-En-rFN">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="101"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="With AppAuth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQA-Od-Bve">
+                                                <rect key="frame" x="0.0" y="101" width="300" height="27"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                <color key="textColor" red="0.050980392156862744" green="0.40000000000000002" blue="0.70196078431372544" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHf-9l-hhF">
+                                                <rect key="frame" x="0.0" y="128" width="300" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZDa-gJ-JOQ">
+                                        <rect key="frame" x="0.0" y="149" width="304" height="318"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cg7-iw-Y22">
+                                                <rect key="frame" x="0.0" y="0.0" width="124" height="318"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Cx3-uJ-qVK">
+                                                        <rect key="frame" x="2" y="0.0" width="119" height="106"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="key_circle" translatesAutoresizingMaskIntoConstraints="NO" id="vVV-cu-yso">
+                                                                <rect key="frame" x="24" y="0.0" width="72" height="72"/>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="BCd-IF-hkn">
+                                                                <rect key="frame" x="11" y="72" width="97" height="34"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <state key="normal" title="Get Tokens">
+                                                                    <color key="titleColor" red="0.12549019607843137" green="0.47843137254901963" blue="0.74117647058823533" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="getTokensButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rrk-an-ZAc"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kB7-pi-FyV">
+                                                        <rect key="frame" x="0.0" y="106" width="124" height="106"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="refresh" translatesAutoresizingMaskIntoConstraints="NO" id="AVK-HQ-tTo">
+                                                                <rect key="frame" x="26" y="0.0" width="72" height="72"/>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="bal-Ud-3Ie">
+                                                                <rect key="frame" x="0.0" y="72" width="124" height="34"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <state key="normal" title="Refresh Token">
+                                                                    <color key="titleColor" red="0.12549019610000001" green="0.47843137250000001" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="refreshTokenButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iqA-Ik-Fs8"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cBw-xN-gIr">
+                                                        <rect key="frame" x="26" y="212" width="72" height="106"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="api" translatesAutoresizingMaskIntoConstraints="NO" id="sWp-e8-mxJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="72" height="72"/>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yAP-W7-u0D">
+                                                                <rect key="frame" x="0.0" y="72" width="72" height="34"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <state key="normal" title="Call API">
+                                                                    <color key="titleColor" red="0.12549019610000001" green="0.47843137250000001" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Dd-dl-TJQ">
+                                                <rect key="frame" x="185" y="0.0" width="119" height="318"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v0s-6o-NKD">
+                                                        <rect key="frame" x="3" y="0.0" width="114" height="106"/>
+                                                        <subviews>
+                                                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Reporting" translatesAutoresizingMaskIntoConstraints="NO" id="HcI-xk-VRT">
+                                                                <rect key="frame" x="0.0" y="0.0" width="114" height="72"/>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Eg9-lS-Cpo">
+                                                                <rect key="frame" x="0.0" y="72" width="114" height="34"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <state key="normal" title="Get User Info">
+                                                                    <color key="titleColor" red="0.12549019610000001" green="0.47843137250000001" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="userinfo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HjJ-LS-Nry"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="VYm-Qa-eBy">
+                                                        <rect key="frame" x="0.0" y="106" width="119" height="106"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="revoke" translatesAutoresizingMaskIntoConstraints="NO" id="iPZ-vi-rn0">
+                                                                <rect key="frame" x="24" y="0.0" width="72" height="72"/>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="0Pp-sB-jdO">
+                                                                <rect key="frame" x="0.0" y="72" width="119" height="34"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <state key="normal" title="Revoke Token">
+                                                                    <color key="titleColor" red="0.12549019610000001" green="0.47843137250000001" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="revokeTokensButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4cy-u4-mru"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DGj-SB-PkJ">
+                                                        <rect key="frame" x="4" y="212" width="112" height="106"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_key" translatesAutoresizingMaskIntoConstraints="NO" id="F4p-EU-p18">
+                                                                <rect key="frame" x="20" y="0.0" width="72" height="72"/>
+                                                            </imageView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkK-5F-HK2">
+                                                                <rect key="frame" x="0.0" y="72" width="112" height="34"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <state key="normal" title="Clear Tokens">
+                                                                    <color key="titleColor" red="0.12549019610000001" green="0.47843137250000001" blue="0.74117647060000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="clearButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LWh-R6-uEQ"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="9Dd-dl-TJQ" firstAttribute="leading" secondItem="BCd-IF-hkn" secondAttribute="trailing" constant="75" id="74p-wy-BNu"/>
+                                            <constraint firstItem="9Dd-dl-TJQ" firstAttribute="width" secondItem="Cx3-uJ-qVK" secondAttribute="width" id="ZBZ-Zf-ACO"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tvZ-5W-xR0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CGc-uc-CF4"/>
+                            <constraint firstItem="tvZ-5W-xR0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="n2p-rY-TlO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="apiCallIcon" destination="sWp-e8-mxJ" id="igh-lk-Ekr"/>
+                        <outlet property="callApiButton" destination="yAP-W7-u0D" id="8QI-1w-nac"/>
+                        <outlet property="clearButton" destination="kkK-5F-HK2" id="0TT-tO-0pS"/>
+                        <outlet property="clearIcon" destination="F4p-EU-p18" id="lou-oW-glb"/>
+                        <outlet property="refreshTokenIcon" destination="AVK-HQ-tTo" id="kz6-8e-nfK"/>
+                        <outlet property="refreshTokensButton" destination="bal-Ud-3Ie" id="NTX-7d-kh3"/>
+                        <outlet property="revokeTokenIcon" destination="iPZ-vi-rn0" id="3Wo-jc-g7M"/>
+                        <outlet property="revokeTokensButton" destination="0Pp-sB-jdO" id="Gjq-dk-HfJ"/>
+                        <outlet property="tokensIcon" destination="vVV-cu-yso" id="Cdv-wU-pMQ"/>
+                        <outlet property="userInfoButton" destination="Eg9-lS-Cpo" id="cDk-MP-aaB"/>
+                        <outlet property="userInfoIcon" destination="HcI-xk-VRT" id="3TZ-Sz-IjL"/>
+                        <segue destination="hNC-Ju-ZWe" kind="presentation" identifier="ImageViewSegue" id="tBb-uk-pMW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="301" y="429"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="sIc-ig-vHy">
+            <objects>
+                <viewController id="hNC-Ju-ZWe" customClass="ImageViewController" customModule="OpenIDConnectSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wrr-bo-8Lg"/>
+                        <viewControllerLayoutGuide type="bottom" id="hGD-rs-gHx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="r4G-gI-OLf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0yV-Qk-PXj">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2t6-Pj-ERU">
+                                <rect key="frame" x="277" y="28" width="46" height="30"/>
+                                <state key="normal" title="Return"/>
+                                <connections>
+                                    <action selector="backButton:" destination="hNC-Ju-ZWe" eventType="touchUpInside" id="Nnd-FT-CdF"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qfH-6x-hUb">
+                                <rect key="frame" x="200" y="200" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="rSc-Kt-Zih"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsK-qm-2wg">
+                                <rect key="frame" x="20" y="408" width="560" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hGD-rs-gHx" firstAttribute="top" secondItem="MsK-qm-2wg" secondAttribute="bottom" constant="160" id="0Ey-lv-KBB"/>
+                            <constraint firstItem="2t6-Pj-ERU" firstAttribute="top" secondItem="wrr-bo-8Lg" secondAttribute="bottom" constant="8" symbolic="YES" id="3hU-4h-GTe"/>
+                            <constraint firstItem="MsK-qm-2wg" firstAttribute="top" secondItem="qfH-6x-hUb" secondAttribute="bottom" constant="8" symbolic="YES" id="HfG-PX-zqJ"/>
+                            <constraint firstItem="qfH-6x-hUb" firstAttribute="centerX" secondItem="0yV-Qk-PXj" secondAttribute="centerX" id="IgV-JA-nQZ"/>
+                            <constraint firstItem="hGD-rs-gHx" firstAttribute="top" secondItem="qfH-6x-hUb" secondAttribute="bottom" constant="200" id="Thp-fN-7Bo"/>
+                            <constraint firstItem="qfH-6x-hUb" firstAttribute="centerY" secondItem="r4G-gI-OLf" secondAttribute="centerY" id="UqO-nh-9Bx"/>
+                            <constraint firstItem="qfH-6x-hUb" firstAttribute="centerY" secondItem="0yV-Qk-PXj" secondAttribute="centerY" id="cc2-cy-6ZL"/>
+                            <constraint firstItem="MsK-qm-2wg" firstAttribute="leading" secondItem="r4G-gI-OLf" secondAttribute="leadingMargin" id="n1k-V8-PQ6"/>
+                            <constraint firstItem="2t6-Pj-ERU" firstAttribute="centerX" secondItem="0yV-Qk-PXj" secondAttribute="centerX" id="qzA-fK-Z5B"/>
+                            <constraint firstItem="MsK-qm-2wg" firstAttribute="centerX" secondItem="0yV-Qk-PXj" secondAttribute="centerX" id="sSC-YQ-Ajr"/>
+                            <constraint firstItem="qfH-6x-hUb" firstAttribute="centerX" secondItem="r4G-gI-OLf" secondAttribute="centerX" id="txO-jz-62U"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityLoad" destination="0yV-Qk-PXj" id="qFY-07-9WW"/>
+                        <outlet property="image" destination="qfH-6x-hUb" id="iY4-6j-gH7"/>
+                        <outlet property="imageText" destination="MsK-qm-2wg" id="w5t-Gt-BjR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X4i-FO-mps" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="990" y="429"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Reporting" width="72" height="72"/>
+        <image name="api" width="72" height="72"/>
+        <image name="ic_key" width="72" height="72"/>
+        <image name="key_circle" width="72" height="72"/>
+        <image name="okta_logo" width="300" height="101"/>
+        <image name="refresh" width="72" height="72"/>
+        <image name="revoke" width="72" height="72"/>
+    </resources>
+</document>
