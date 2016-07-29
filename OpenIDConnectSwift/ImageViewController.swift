@@ -109,9 +109,8 @@ class ImageViewController: UIViewController {
      *    - name: Name of user
      */
     func loadImageFromURL(url: String, name: String){
-        let formattedUrl = url.substringWithRange(Range(url.startIndex.advancedBy(2)..<url.endIndex))
-        print("url: \(formattedUrl)")
-        if let userImageURL = NSURL(string: "https://"+formattedUrl){
+        print("url: \(url)")
+        if let userImageURL = NSURL(string: url){
             let data = NSData(contentsOfURL: userImageURL)
             if (data != nil){
                 self.image.image = UIImage(data: data!)

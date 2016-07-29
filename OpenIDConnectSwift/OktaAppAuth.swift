@@ -187,7 +187,8 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                             OIDScopePhone,
                             OIDScopeAddress,
                             "groups",
-                            "offline_access"
+                            "offline_access",
+                            "gravatar"
                         ],
                         redirectURL: redirectURI!,
                         responseType: OIDResponseTypeCode,

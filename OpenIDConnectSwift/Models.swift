@@ -29,6 +29,6 @@ class OktaConfiguration {
         kClientID = "79arVRKBcBEYMuMOXrYF"                                      // Client ID of Application
         kRedirectURI = "com.oktapreview.example:/oauth"                         // Reverse DNS notation of base url with oauth route
         kAppAuthExampleAuthStateKey = "com.okta.openid.authState"
-        apiEndpoint = NSURL(string: "https://example.com/protected")      // Resource Server URL
+        apiEndpoint = NSURL(string: "https://example.com/protected")            // Resource Server URL
     }
 }
