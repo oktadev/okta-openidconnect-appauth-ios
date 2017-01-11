@@ -4,25 +4,25 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "512EC7E7FDED77AECD3A591C668F2AA95D974C50" : 0,
-    "91371A19D78094A51344C695621BF3993163597B" : 0
+    "512EC7E7FDED77AECD3A591C668F2AA95D974C50" : 9223372036854775807,
+    "91371A19D78094A51344C695621BF3993163597B" : 9223372036854775807
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9FEE02B6-335F-47EC-9C80-5D7D2FEBDF66",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5C2C0B8A-5694-46B9-A69E-035F957E9F47",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "512EC7E7FDED77AECD3A591C668F2AA95D974C50" : "okta-openidconnect-appauth-ios\/",
     "91371A19D78094A51344C695621BF3993163597B" : ".."
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "OpenIDConnectSwift",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "OpenIDConnectSwift.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "OpenIDConnectSwift.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:oktadeveloper\/okta-openidconnect-appauth-sample-swift.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:oktadeveloper\/okta-openidconnect-appauth-ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "512EC7E7FDED77AECD3A591C668F2AA95D974C50"
     },
     {
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jmelberg\/oauth-resource-server.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:jmelberg-okta\/acmeHealth-aws-lambda-dynamodb.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "91371A19D78094A51344C695621BF3993163597B"
     }

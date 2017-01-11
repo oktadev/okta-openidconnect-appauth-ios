@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CC24BEEA6E1FC4A0B31651A2AAEAB708'
+               BlueprintIdentifier = '5007BC27F672CE9D77171AE5A21E812D'
                BlueprintName = 'AppAuth'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'AppAuth.framework'>

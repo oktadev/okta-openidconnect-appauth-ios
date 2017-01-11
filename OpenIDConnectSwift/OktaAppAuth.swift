@@ -57,32 +57,32 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
     func connectIcons() {
         // Assign Access Icon to Retrieve Access Token
         let tokens_gesture = UITapGestureRecognizer(target:self, action: #selector(OktaAppAuth.getTokensButton(_:)))
-        tokensIcon.userInteractionEnabled = true
+        tokensIcon.isUserInteractionEnabled = true
         tokensIcon.addGestureRecognizer(tokens_gesture)
         
         //Assign Userinfo Icon to Retrieve User Info
         let user_gesture = UITapGestureRecognizer(target: self, action:#selector(OktaAppAuth.userinfo(_:)))
-        userInfoIcon.userInteractionEnabled = true
+        userInfoIcon.isUserInteractionEnabled = true
         userInfoIcon.addGestureRecognizer(user_gesture)
         
         //Assign API Call Icon to Retrieve Info from Demo Endpoint
         let api_gesture = UITapGestureRecognizer(target: self, action:#selector(OktaAppAuth.apiCall))
-        apiCallIcon.userInteractionEnabled = true
+        apiCallIcon.isUserInteractionEnabled = true
         apiCallIcon.addGestureRecognizer(api_gesture)
         
         //Assign Refresh Token Icon to Function
         let refresh_gesture = UITapGestureRecognizer(target: self, action:#selector(OktaAppAuth.refreshTokens))
-        refreshTokenIcon.userInteractionEnabled = true
+        refreshTokenIcon.isUserInteractionEnabled = true
         refreshTokenIcon.addGestureRecognizer(refresh_gesture)
         
         // Assign Revoke Token Icon to Function
         let revoke_gesture = UITapGestureRecognizer(target: self, action:#selector(OktaAppAuth.revokeToken))
-        revokeTokenIcon.userInteractionEnabled = true
+        revokeTokenIcon.isUserInteractionEnabled = true
         revokeTokenIcon.addGestureRecognizer(revoke_gesture)
         
         // Assign Sign out to Function
         let clear_gesture = UITapGestureRecognizer(target: self, action: #selector(OktaAppAuth.clearTokens))
-        clearIcon.userInteractionEnabled = true
+        clearIcon.isUserInteractionEnabled = true
         clearIcon.addGestureRecognizer(clear_gesture)
         
     }
@@ -95,31 +95,31 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
      *    - alertTitle: Title of alert
      *    - alertMessage: Output message
      */
-    func createAlert(alertTitle: String, alertMessage: String) {
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .Alert)
-        alert.view.tintColor = UIColor.blackColor()
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: nil))
-        let textIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRectMake(10, 5, 50, 50)) as UIActivityIndicatorView
+    func createAlert(_ alertTitle: String, alertMessage: String) {
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
+        alert.view.tintColor = UIColor.black
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+        let textIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50)) as UIActivityIndicatorView
         alert.view.addSubview(textIndicator)
         
-        presentViewController(alert, animated: true, completion: nil)
+        present(alert, animated: true, completion: nil)
     }
     
     /**  Saves the current authState into NSUserDefaults  */
     func saveState() {
         if(authState != nil){
-            let archivedAuthState = NSKeyedArchiver.archivedDataWithRootObject(authState!)
-            NSUserDefaults.standardUserDefaults().setObject(archivedAuthState, forKey: appConfig.kAppAuthExampleAuthStateKey)
+            let archivedAuthState = NSKeyedArchiver.archivedData(withRootObject: authState!)
+            UserDefaults.standard.set(archivedAuthState, forKey: appConfig.kAppAuthExampleAuthStateKey)
         }
-        else { NSUserDefaults.standardUserDefaults().setObject(nil, forKey: appConfig.kAppAuthExampleAuthStateKey) }
+        else { UserDefaults.standard.set(nil, forKey: appConfig.kAppAuthExampleAuthStateKey) }
         
-        NSUserDefaults.standardUserDefaults().synchronize()
+        UserDefaults.standard.synchronize()
     }
     
     /**  Loads the current authState from NSUserDefaults */
     func loadState() {
-        if let archivedAuthState = NSUserDefaults.standardUserDefaults().objectForKey(appConfig.kAppAuthExampleAuthStateKey) as? NSData {
-            if let authState = NSKeyedUnarchiver.unarchiveObjectWithData(archivedAuthState) as? OIDAuthState {
+        if let archivedAuthState = UserDefaults.standard.object(forKey: appConfig.kAppAuthExampleAuthStateKey) as? Data {
+            if let authState = NSKeyedUnarchiver.unarchiveObject(with: archivedAuthState) as? OIDAuthState {
                 setAuthState(authState)
             } else {  return  }
         } else { return }
@@ -129,7 +129,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
      *  Setter method for authState update
      *  :param: authState The input value representing the new authorization state
      */
-    private func setAuthState(authState:OIDAuthState?){
+    fileprivate func setAuthState(_ authState:OIDAuthState?){
         self.authState = authState
         self.authState?.stateChangeDelegate = self
         self.stateChanged()
@@ -139,7 +139,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
     func stateChanged(){ self.saveState() }
     
     /**  Required method  */
-    func didChangeState(state: OIDAuthState) { self.stateChanged() }
+    func didChange(_ state: OIDAuthState) { self.stateChanged() }
     
     /**  Verifies authState was performed  */
     func checkAuthState() -> Bool {
@@ -152,7 +152,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
      *  Starts Authorization Flow
      *  :param: sender The UI button 'Get Tokens'
      */
-    @IBAction func getTokensButton(sender: AnyObject) { authenticate() }
+    @IBAction func getTokensButton(_ sender: AnyObject) { authenticate() }
     
     /**
      *  Authorization Flow Sequence
@@ -164,11 +164,11 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
      *  -   Alerts: Success
      */
     func authenticate() {
-        let issuer = NSURL(string: appConfig.kIssuer)
-        let redirectURI = NSURL(string: appConfig.kRedirectURI)
+        let issuer = URL(string: appConfig.kIssuer)
+        let redirectURI = URL(string: appConfig.kRedirectURI)
         
         // Discovers Endpoints
-        OIDAuthorizationService.discoverServiceConfigurationForIssuer(issuer!) {
+        OIDAuthorizationService.discoverConfiguration(forIssuer: issuer!) {
             config, error in
             
             if ((config == nil)) {
@@ -192,11 +192,11 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                         redirectURL: redirectURI!,
                         responseType: OIDResponseTypeCode,
                         additionalParameters: nil)
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             print("Initiating Authorization Request: \(request!)")
             appDelegate.currentAuthorizationFlow =
-                OIDAuthState.authStateByPresentingAuthorizationRequest(request!,presentingViewController: self){
+                OIDAuthState.authState(byPresenting: request!, presenting: self){
                     authorizationResponse, error in
                     if(authorizationResponse != nil) {
                         self.setAuthState(authorizationResponse)
@@ -220,7 +220,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
      *  - parameters:
      *    - sender: The UI button 'Get User Info'
      */
-    @IBAction func userinfo(sender: AnyObject) {
+    @IBAction func userinfo(_ sender: AnyObject) {
         let userinfoEndpoint = authState?.lastAuthorizationResponse
             .request.configuration.discoveryDocument?.userinfoEndpoint
         if(userinfoEndpoint  == nil ) {
@@ -239,7 +239,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
      *  - parameters:
      *    - url: The url in NSURL format for the request to be made
      */
-    func sendUserInfoRequest(url: NSURL){
+    func sendUserInfoRequest(_ url: URL){
         if checkAuthState() {
             // Check if token is revoked
             var token = authState?.lastTokenResponse?.accessToken
@@ -273,29 +273,31 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
      *      - currentAccessToken: Current access token (may be refreshed)
      *      - url: NSURL of API endpoint
      */
-    func performRequest(returnTitle: String, currentAccessToken: String, url: NSURL) {
+    func performRequest(_ returnTitle: String, currentAccessToken: String, url: URL) {
         // Create Request to endpoint, with access_token in Authorization Header
-        let request = NSMutableURLRequest(URL: url)
+        
+        var request = URLRequest(url:url)
         let authorizationHeaderValue = "Bearer \(currentAccessToken)"
         request.addValue(authorizationHeaderValue, forHTTPHeaderField: "Authorization")
             
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        
             
         //Perform HTTP Request
-        let postDataTask = session.dataTaskWithRequest(request) {
+        let postDataTask = session.dataTask(with: request, completionHandler: {
             data, response, error in
-            dispatch_async( dispatch_get_main_queue() ){
-                if let httpResponse = response as? NSHTTPURLResponse {
+            DispatchQueue.main.async{
+                if let httpResponse = response as? HTTPURLResponse {
                     do{
-                        let jsonDictionaryOrArray = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers)
+                        let jsonDictionaryOrArray = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                         if ( httpResponse.statusCode != 200 ){
-                            let responseText = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                            let responseText = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                             if ( httpResponse.statusCode == 401 ){
-                                let oauthError = OIDErrorUtilities.resourceServerAuthorizationErrorWithCode(0,
-                                    errorResponse: jsonDictionaryOrArray as? [NSObject : AnyObject],
+                                let oauthError = OIDErrorUtilities.resourceServerAuthorizationError(withCode: 0,
+                                    errorResponse: jsonDictionaryOrArray as? [AnyHashable: Any],
                                     underlyingError: error)
-                                self.authState?.updateWithAuthorizationError(oauthError!)
+                                self.authState?.update(withAuthorizationError: oauthError!)
                                 self.createAlert("OAuth Error", alertMessage: "\(oauthError)")
                                 print("Authorization Error (\(oauthError!)). Response: \(responseText!)")
                             }
@@ -310,7 +312,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                     return
                 }
             }
-        }
+        }) 
         postDataTask.resume()
     }
     
@@ -320,7 +322,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
      *  - parameters:
      *    - sender: UI button 'Refresh Token'
      */
-    @IBAction func refreshTokenButton(sender: AnyObject) { refreshTokens() }
+    @IBAction func refreshTokenButton(_ sender: AnyObject) { refreshTokens() }
     
     /**  Refreshes the current tokens with existing refresh token  */
     func refreshTokens(){
@@ -348,7 +350,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
      *  - parameters:
      *    - sender: UI button 'Revoke Token'
      */
-    @IBAction func revokeTokensButton(sender: AnyObject) { revokeToken() }
+    @IBAction func revokeTokensButton(_ sender: AnyObject) { revokeToken() }
     
     /**  Revokes current access token by calling OAuth revoke endpoint  */
     func revokeToken(){
@@ -357,21 +359,21 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
             authState?.withFreshTokensPerformAction(){
                 accessToken, idToken, error in
                 
-                let url = NSURL(string: "\(self.appConfig.kIssuer)/oauth2/v1/revoke")
-                let request = NSMutableURLRequest(URL: url!)
-                request.HTTPMethod = "POST"
+                let url = URL(string: "\(self.appConfig.kIssuer)/oauth2/v1/revoke")
+                var request = URLRequest(url: url!)
+                request.httpMethod = "POST"
                 
                 let requestData = "token=\(accessToken!)&client_id=\(self.appConfig.kClientID)"
-                request.HTTPBody = requestData.dataUsingEncoding(NSUTF8StringEncoding)
+                request.httpBody = requestData.data(using: String.Encoding.utf8)
                 
-                let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-                let session = NSURLSession(configuration: config)
+                let config = URLSessionConfiguration.default
+                let session = URLSession(configuration: config)
                 
                 //Perform HTTP Request
-                let postDataTask = session.dataTaskWithRequest(request) {
+                let postDataTask = session.dataTask(with: request, completionHandler: {
                     data, response, error in
-                    dispatch_async( dispatch_get_main_queue() ){
-                        if let httpResponse = response as? NSHTTPURLResponse {
+                    DispatchQueue.main.async{
+                        if let httpResponse = response as? HTTPURLResponse {
                             do{
                                 if (httpResponse.statusCode == 200 || httpResponse.statusCode == 204){
                                     self.createAlert("Token Revoked", alertMessage: "Previous access token is considered invalid")
@@ -381,14 +383,14 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                                     return
                                 } else {
                                     // Error JSON
-                                    let jsonDictionaryOrArray = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers)
+                                    let jsonDictionaryOrArray = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                                     if ( httpResponse.statusCode != 200 || httpResponse.statusCode != 204 ){
-                                        let responseText = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                                        let responseText = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                                         if ( httpResponse.statusCode == 401 ){
-                                            let oauthError = OIDErrorUtilities.resourceServerAuthorizationErrorWithCode(0,
-                                                errorResponse: jsonDictionaryOrArray as? [NSObject : AnyObject],
+                                            let oauthError = OIDErrorUtilities.resourceServerAuthorizationError(withCode: 0,
+                                                errorResponse: jsonDictionaryOrArray as? [AnyHashable: Any],
                                                 underlyingError: error)
-                                            self.authState?.updateWithAuthorizationError(oauthError!)
+                                            self.authState?.update(withAuthorizationError: oauthError!)
                                             print("Authorization Error (\(oauthError)). Response: \(responseText)")
                                         }
                                         else{ print("HTTP: \(httpResponse.statusCode). Response: \(responseText)") }
@@ -400,7 +402,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                             return
                         }
                     }
-                }
+                }) 
                 postDataTask.resume()
             }
         } else {
@@ -415,14 +417,14 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
      *  - parameters:
      *    - sender: UI button 'Clear Tokens'
      */
-    @IBAction func clearButton(sender: AnyObject) { clearTokens() }
+    @IBAction func clearButton(_ sender: AnyObject) { clearTokens() }
     
     /**  Removes all tokens from curent authState  */
     func clearTokens(){
         if checkAuthState() {
             self.setAuthState(nil)
-            let clearAll = NSBundle.mainBundle().bundleIdentifier!
-            NSUserDefaults.standardUserDefaults().removePersistentDomainForName(clearAll)
+            let clearAll = Bundle.main.bundleIdentifier!
+            UserDefaults.standard.removePersistentDomain(forName: clearAll)
             self.saveState()
             createAlert("Signed out", alertMessage: "Successfully forgot all tokens")
         } else {
@@ -435,7 +437,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
     /**  Calls external server API to return image  */
     func apiCall() {
         if checkAuthState(){
-            self.performSegueWithIdentifier("ImageViewSegue", sender: self)
+            self.performSegue(withIdentifier: "ImageViewSegue", sender: self)
         } else {
             print("Not authenticated")
             createAlert("Error", alertMessage: "Not authenticated")
@@ -443,9 +445,9 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
     }
     
     /*  Segue to next ImageView for testing Demo API Call    */
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?){
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
         if segue.identifier == "ImageViewSegue" {
-            let destinationController = segue.destinationViewController as! ImageViewController
+            let destinationController = segue.destination as! ImageViewController
             destinationController.authState = authState
             destinationController.appConfig = appConfig
         }

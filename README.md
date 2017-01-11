@@ -27,23 +27,17 @@ Once the project is cloned, install [AppAuth](https://github.com/openid/AppAuth-
 
 **Important:** Open `OpenIDConnectSwift.xcworkspace`. This file should be used to run/test your application.
 
-Update the **kIssuer**, **kClientID**, and **kRedirectURI** in your `Models.swift` file:
+Update the **kIssuer** and **kClientID** in your `Models.swift` file:
 ```swift
 
 class OktaConfiguration {
     ...
     init(){
-        kIssuer = "https://example.oktapreview.com"       // Base url of Okta Developer domain
-        kClientID = "CLIENT_ID"                           // Client ID of Application
-        kRedirectURI = "com.oktapreview.example:/oauth"   // Reverse DNS notation of base url with oauth route
-        kAppAuthExampleAuthStateKey = "com.okta.oauth.authState"
-        apiEndpoint = NSURL(string: "https://example.server.com")
+        kIssuer = "https://example.oktapreview.com"
+        kClientID = "applicationClientID"   
     }
 }
 ```
-
-Modify the `Info.plist` file by including a custom URI scheme **without** the route
-  - `URL types -> Item 0 -> URL Schemes -> Item 0 ->  <kRedirectURI>` (*Ex: com.oktapreview.example*)
 
 ## Running the Sample Application
 
@@ -93,7 +87,7 @@ If authenticated, the mobile app receives an `idToken`, `accessToken`, and `refr
 
 // Capture Authentication Response
 appDelegate.currentAuthorizationFlow =
-  OIDAuthState.authStateByPresentingAuthorizationRequest(request!,presentingViewController: self){
+  OIDAuthState.authStateByPresentingAuthorizationRequest(request!, presentingViewController: self){
     authorizationResponse, error in
     
     if(authorizationResponse != nil){
@@ -116,10 +110,12 @@ If the user is authenticated, calling the [`/userinfo`](http://developer.okta.co
 ```swift
 //OktaAppAuth.swift
 
-func sendUserInfoRequest(url: NSURL){
+func sendUserInfoRequest(_ url: URL){
   if checkAuthState() {
+    // Check if token is revoked
     var token = authState?.lastTokenResponse?.accessToken
-    if revoked { print("Performing request with revoked accessToken")}
+    
+    if revoked { print("Performing request with revoked accessToken") }
     else {
       print("Performing request with fresh accessToken")
       authState?.withFreshTokensPerformAction(){
@@ -128,14 +124,16 @@ func sendUserInfoRequest(url: NSURL){
         if(error != nil){
           // Error
         }
-        // Update accessToken
+        
         if(token != accessToken){
+          // Update accessToken
           token = accessToken
         } else {
           print("Access token was fresh and not updated [\(token!)]")
         }
       }
     }
+
     // Perform Request
     performRequest("User Info", currentAccessToken: (token)!, url: url)
   }
@@ -150,6 +148,7 @@ The AppAuth method `withFreshTokensPerformAction()` is used to refresh the curre
 
 func refreshTokens(){
   // Refreshes token
+
   if checkAuthState() {
     authState?.setNeedsTokenRefresh()
     authState?.withFreshTokensPerformAction(){
@@ -167,6 +166,7 @@ func refreshTokens(){
     // Not authenticated
   }
 }
+
 ```
 
 ###Revoke Tokens
@@ -181,22 +181,23 @@ func revokeToken(){
     authState?.withFreshTokensPerformAction(){
       accessToken, idToken, error in
       
-      let url = NSURL(string: "\(self.appConfig.kIssuer)/oauth2/v1/revoke")
-      let request = NSMutableURLRequest(URL: url!)
-      request.HTTPMethod = "POST"
-      
+      var request = URLRequest(url: url!)
+      request.httpMethod = "POST"
+                
       let requestData = "token=\(accessToken!)&client_id=\(self.appConfig.kClientID)"
-      request.HTTPBody = requestData.dataUsingEncoding(NSUTF8StringEncoding);
-      
-      let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-      let session = NSURLSession(configuration: config)
+      request.httpBody = requestData.data(using: String.Encoding.utf8)
+                
+      let config = URLSessionConfiguration.default
+      let session = URLSession(configuration: config)
       
       //Perform HTTP Request
       ...
+      
       self.revoked = true // Revoke toggle for calling User Info
     }
   }
 }
+
 ```
 
 ###Call API

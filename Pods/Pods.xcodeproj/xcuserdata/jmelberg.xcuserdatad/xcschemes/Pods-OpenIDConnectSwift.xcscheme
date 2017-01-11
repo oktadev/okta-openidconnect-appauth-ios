@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "930702CF5A3FD54C0E8943D1C7109D49"
+               BlueprintIdentifier = "2FEA3BF5A71FA3EE523820F6BC54FCD0"
                BuildableName = "Pods_OpenIDConnectSwift.framework"
                BlueprintName = "Pods-OpenIDConnectSwift"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "930702CF5A3FD54C0E8943D1C7109D49"
+            BlueprintIdentifier = "2FEA3BF5A71FA3EE523820F6BC54FCD0"
             BuildableName = "Pods_OpenIDConnectSwift.framework"
             BlueprintName = "Pods-OpenIDConnectSwift"
             ReferencedContainer = "container:Pods.xcodeproj">
