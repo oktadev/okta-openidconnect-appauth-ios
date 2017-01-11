@@ -1,6 +1,0 @@
-framework module Pods_OpenIDConnectSwift {
-  umbrella header "Pods-OpenIDConnectSwift-umbrella.h"
-
-  export *
-  module * { export * }
-}
