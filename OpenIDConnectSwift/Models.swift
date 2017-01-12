@@ -22,13 +22,13 @@ class OktaConfiguration {
     let kClientID: String!
     let kRedirectURI: String!
     let kAppAuthExampleAuthStateKey: String!
-    let apiEndpoint: NSURL!
+    let apiEndpoint: URL!
     
     init(){
-        kIssuer = "https://example.oktapreview.com"                             // Base url of Okta Developer domain
-        kClientID = "79arVRKBcBEYMuMOXrYF"                                      // Client ID of Application
-        kRedirectURI = "com.oktapreview.example:/oauth"                         // Reverse DNS notation of base url with oauth route
+        kIssuer = "https://example.oktapreview.com"                        // Base url of Okta Developer domain
+        kClientID = "applicationClientId"                                  // Client ID of Application
+        apiEndpoint = URL(string: "https://example.com/protected")         // Resource Server URL
+        kRedirectURI = "com.oktapreview.example:/oauth"
         kAppAuthExampleAuthStateKey = "com.okta.openid.authState"
-        apiEndpoint = NSURL(string: "https://example.com/protected")            // Resource Server URL
     }
 }

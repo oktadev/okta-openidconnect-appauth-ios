@@ -32,7 +32,7 @@ class ImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         activityLoad.startAnimating()
-        sendDemoApiRequest(appConfig.apiEndpoint!, accessToken: (authState?.lastTokenResponse!.accessToken)!)
+        sendDemoApiRequest(appConfig.apiEndpoint! as URL, accessToken: (authState?.lastTokenResponse!.accessToken)!)
     }
     
     override func didReceiveMemoryWarning() { super.didReceiveMemoryWarning() }
@@ -44,33 +44,34 @@ class ImageViewController: UIViewController {
      *    - url: NSURL of server endpoint
      *    - accessToken: Current token
      */
-    func sendDemoApiRequest(url: NSURL, accessToken: String){
+    func sendDemoApiRequest(_ url: URL, accessToken: String){
         print("Performing DEMO API request without auto-refresh")
         
         // Create Requst to Demo API endpoint, with access_token in Authorization Header
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "GET"
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
         let authorizationHeaderValue = "Bearer \(accessToken)"
         request.addValue(authorizationHeaderValue, forHTTPHeaderField: "Authorization")
               
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: config)
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
         
         //Perform HTTP Request
-        let postDataTask = session.dataTaskWithRequest(request) {
+        let postDataTask = session.dataTask(with: request, completionHandler: {
             data, response, error in
-            dispatch_async( dispatch_get_main_queue() ){
+            DispatchQueue.main.async{
                     
-                if let httpResponse = response as? NSHTTPURLResponse {
+                if let httpResponse = response as? HTTPURLResponse {
                     do{
-                        let jsonDictionaryOrArray = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers)
+                        let jsonDictionaryOrArray = try JSONSerialization.jsonObject(with: data!, options: []) as! [String:Any]
                         if ( httpResponse.statusCode != 200 ){
-                            let responseText = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                            let responseText = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
                             if ( httpResponse.statusCode == 401 ){
-                                let oauthError = OIDErrorUtilities.resourceServerAuthorizationErrorWithCode(0,
-                                    errorResponse: jsonDictionaryOrArray as? [NSObject : AnyObject],
+                                let oauthError = OIDErrorUtilities.resourceServerAuthorizationError(withCode: 0,
+                                    errorResponse: jsonDictionaryOrArray,
                                     underlyingError: error)
-                                self.authState?.updateWithAuthorizationError(oauthError!)
+                                self.authState?.update(withAuthorizationError: oauthError!)
                                 print("Authorization Error (\(oauthError)). Response: \(responseText)")
                             }
                             else{ print("HTTP: \(httpResponse.statusCode). Response: \(responseText)") }
@@ -85,19 +86,19 @@ class ImageViewController: UIViewController {
                         else if jsonDictionaryOrArray["Error"] != nil{
                             self.imageText.text = jsonDictionaryOrArray["Error"] as? String
                             self.activityLoad.stopAnimating()
-                            print(jsonDictionaryOrArray["Error"])
+                            print(jsonDictionaryOrArray["Error"]!)
                             print("\(jsonDictionaryOrArray)")
                         }
                     } catch {
                         print("Error while serializing data to JSON")
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                     }
                 } else {
                     print("Non-HTTP response \(error)")
                     return
                 }
             }
-        }
+        }) 
         postDataTask.resume()
     }
 
@@ -108,10 +109,10 @@ class ImageViewController: UIViewController {
      *    - url: Url of image path
      *    - name: Name of user
      */
-    func loadImageFromURL(url: String, name: String){
+    func loadImageFromURL(_ url: String, name: String){
         print("url: \(url)")
-        if let userImageURL = NSURL(string: url){
-            let data = NSData(contentsOfURL: userImageURL)
+        if let userImageURL = URL(string: url){
+            let data = try? Data(contentsOf: userImageURL)
             if (data != nil){
                 self.image.image = UIImage(data: data!)
                 self.imageText.text = name
@@ -122,7 +123,7 @@ class ImageViewController: UIViewController {
     }
     
     /**  Dismisses ImageViewController  */
-    @IBAction func backButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func backButton(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
