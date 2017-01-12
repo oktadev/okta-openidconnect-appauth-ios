@@ -1,0 +1,402 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		28E3361AC4833E92B700318F /* Pods_OpenIDConnectSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4F2115040DA5DDAA9217F3D /* Pods_OpenIDConnectSwift.framework */; };
+		710124B31D11BCD9009F420A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710124B21D11BCD9009F420A /* AppDelegate.swift */; };
+		710124B51D11BCD9009F420A /* OktaAppAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710124B41D11BCD9009F420A /* OktaAppAuth.swift */; };
+		710124B81D11BCD9009F420A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 710124B61D11BCD9009F420A /* Main.storyboard */; };
+		710124BA1D11BCD9009F420A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 710124B91D11BCD9009F420A /* Assets.xcassets */; };
+		710124BD1D11BCD9009F420A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 710124BB1D11BCD9009F420A /* LaunchScreen.storyboard */; };
+		710124C61D11DBD8009F420A /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710124C51D11DBD8009F420A /* Models.swift */; };
+		71724C261D189D2F00077380 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71724C251D189D2F00077380 /* ImageViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		08D36EB095FD9E1BF02D1FE7 /* Pods-OpenIDConnectSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenIDConnectSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenIDConnectSwift/Pods-OpenIDConnectSwift.release.xcconfig"; sourceTree = "<group>"; };
+		710124AF1D11BCD9009F420A /* OpenIDConnectSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenIDConnectSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		710124B21D11BCD9009F420A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		710124B41D11BCD9009F420A /* OktaAppAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OktaAppAuth.swift; sourceTree = "<group>"; };
+		710124B71D11BCD9009F420A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		710124B91D11BCD9009F420A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		710124BC1D11BCD9009F420A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		710124BE1D11BCD9009F420A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		710124C41D11BDB9009F420A /* AppAuth-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppAuth-Bridging-Header.h"; sourceTree = "<group>"; };
+		710124C51D11DBD8009F420A /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		71724C251D189D2F00077380 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		D4F2115040DA5DDAA9217F3D /* Pods_OpenIDConnectSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OpenIDConnectSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAB41A5EFBA638662D974B56 /* Pods-OpenIDConnectSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenIDConnectSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenIDConnectSwift/Pods-OpenIDConnectSwift.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		710124AC1D11BCD9009F420A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28E3361AC4833E92B700318F /* Pods_OpenIDConnectSwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		32339B293EFBDE1B9CF3EB1E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DAB41A5EFBA638662D974B56 /* Pods-OpenIDConnectSwift.debug.xcconfig */,
+				08D36EB095FD9E1BF02D1FE7 /* Pods-OpenIDConnectSwift.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		710124A61D11BCD9009F420A = {
+			isa = PBXGroup;
+			children = (
+				710124B11D11BCD9009F420A /* OpenIDConnectSwift */,
+				710124B01D11BCD9009F420A /* Products */,
+				32339B293EFBDE1B9CF3EB1E /* Pods */,
+				CBDC35AF8987EAEE5B45C0F9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		710124B01D11BCD9009F420A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				710124AF1D11BCD9009F420A /* OpenIDConnectSwift.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		710124B11D11BCD9009F420A /* OpenIDConnectSwift */ = {
+			isa = PBXGroup;
+			children = (
+				710124B21D11BCD9009F420A /* AppDelegate.swift */,
+				710124B41D11BCD9009F420A /* OktaAppAuth.swift */,
+				710124B61D11BCD9009F420A /* Main.storyboard */,
+				710124B91D11BCD9009F420A /* Assets.xcassets */,
+				710124BB1D11BCD9009F420A /* LaunchScreen.storyboard */,
+				710124BE1D11BCD9009F420A /* Info.plist */,
+				710124C41D11BDB9009F420A /* AppAuth-Bridging-Header.h */,
+				710124C51D11DBD8009F420A /* Models.swift */,
+				71724C251D189D2F00077380 /* ImageViewController.swift */,
+			);
+			path = OpenIDConnectSwift;
+			sourceTree = "<group>";
+		};
+		CBDC35AF8987EAEE5B45C0F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4F2115040DA5DDAA9217F3D /* Pods_OpenIDConnectSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		710124AE1D11BCD9009F420A /* OpenIDConnectSwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 710124C11D11BCD9009F420A /* Build configuration list for PBXNativeTarget "OpenIDConnectSwift" */;
+			buildPhases = (
+				A2EBECFD934D16C11CF8EB95 /* [CP] Check Pods Manifest.lock */,
+				710124AB1D11BCD9009F420A /* Sources */,
+				710124AC1D11BCD9009F420A /* Frameworks */,
+				710124AD1D11BCD9009F420A /* Resources */,
+				6A0C7B6E4671715FAE179913 /* [CP] Embed Pods Frameworks */,
+				5A6523A92FE01F9066BE9905 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenIDConnectSwift;
+			productName = OpenIDConnectSwift;
+			productReference = 710124AF1D11BCD9009F420A /* OpenIDConnectSwift.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		710124A71D11BCD9009F420A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Jordan Melberg";
+				TargetAttributes = {
+					710124AE1D11BCD9009F420A = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = UE9VMQ3VS6;
+						LastSwiftMigration = 0810;
+					};
+				};
+			};
+			buildConfigurationList = 710124AA1D11BCD9009F420A /* Build configuration list for PBXProject "OpenIDConnectSwift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 710124A61D11BCD9009F420A;
+			productRefGroup = 710124B01D11BCD9009F420A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				710124AE1D11BCD9009F420A /* OpenIDConnectSwift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		710124AD1D11BCD9009F420A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				710124BD1D11BCD9009F420A /* LaunchScreen.storyboard in Resources */,
+				710124BA1D11BCD9009F420A /* Assets.xcassets in Resources */,
+				710124B81D11BCD9009F420A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5A6523A92FE01F9066BE9905 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenIDConnectSwift/Pods-OpenIDConnectSwift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A0C7B6E4671715FAE179913 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-OpenIDConnectSwift/Pods-OpenIDConnectSwift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A2EBECFD934D16C11CF8EB95 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		710124AB1D11BCD9009F420A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				710124C61D11DBD8009F420A /* Models.swift in Sources */,
+				710124B51D11BCD9009F420A /* OktaAppAuth.swift in Sources */,
+				71724C261D189D2F00077380 /* ImageViewController.swift in Sources */,
+				710124B31D11BCD9009F420A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		710124B61D11BCD9009F420A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				710124B71D11BCD9009F420A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		710124BB1D11BCD9009F420A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				710124BC1D11BCD9009F420A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		710124BF1D11BCD9009F420A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		710124C01D11BCD9009F420A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		710124C21D11BCD9009F420A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DAB41A5EFBA638662D974B56 /* Pods-OpenIDConnectSwift.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = OpenIDConnectSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.okta.jmelberg.OpenIDConnectSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		710124C31D11BCD9009F420A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08D36EB095FD9E1BF02D1FE7 /* Pods-OpenIDConnectSwift.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = OpenIDConnectSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.okta.jmelberg.OpenIDConnectSwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		710124AA1D11BCD9009F420A /* Build configuration list for PBXProject "OpenIDConnectSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				710124BF1D11BCD9009F420A /* Debug */,
+				710124C01D11BCD9009F420A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		710124C11D11BCD9009F420A /* Build configuration list for PBXNativeTarget "OpenIDConnectSwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				710124C21D11BCD9009F420A /* Debug */,
+				710124C31D11BCD9009F420A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 710124A71D11BCD9009F420A /* Project object */;
+}
