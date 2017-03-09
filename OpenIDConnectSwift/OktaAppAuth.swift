@@ -194,9 +194,9 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                         additionalParameters: nil)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
-            print("Initiating Authorization Request: \(request!)")
+            print("Initiating Authorization Request: \(request)")
             appDelegate.currentAuthorizationFlow =
-                OIDAuthState.authState(byPresenting: request!, presenting: self){
+                OIDAuthState.authState(byPresenting: request, presenting: self){
                     authorizationResponse, error in
                     if(authorizationResponse != nil) {
                         self.setAuthState(authorizationResponse)
@@ -247,7 +247,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
             if revoked { print("Performing request with revoked accessToken") }
             else {
                 print("Performing request with fresh accessToken")
-                authState?.withFreshTokensPerformAction(){
+                authState?.performAction(freshTokens: {
                     accessToken, idToken, error in
                     if(error != nil){
                         print("Error fetching fresh tokens: \(error!.localizedDescription)")
@@ -258,7 +258,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                         print("Access token refreshed automatially (\(token) to \(accessToken!))")
                         token = accessToken
                     } else { print("Access token was fresh and not updated [\(token!)]") }
-                }
+                })
             }
             // Perform Request
             performRequest("User Info", currentAccessToken: (token)!, url: url)
@@ -329,7 +329,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
         if checkAuthState() {
             print("Refreshed tokens")
             authState?.setNeedsTokenRefresh()
-            authState?.withFreshTokensPerformAction(){
+            authState?.performAction(freshTokens: {
                 accessToken, idToken, error in
                 if(error != nil){
                     print("Error fetching fresh tokens: \(error!.localizedDescription)")
@@ -337,7 +337,8 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                     return
                 }
                 self.createAlert("Success", alertMessage: "Token was refreshed")
-            }
+
+            })
         } else {
             print("Not authenticated")
             createAlert("Error", alertMessage: "Not authenticated")
@@ -356,7 +357,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
     func revokeToken(){
         if checkAuthState() {
             print("Revoking token..")
-            authState?.withFreshTokensPerformAction(){
+            authState?.performAction(freshTokens: {
                 accessToken, idToken, error in
                 
                 let url = URL(string: "\(self.appConfig.kIssuer)/oauth2/v1/revoke")
@@ -404,7 +405,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                     }
                 }) 
                 postDataTask.resume()
-            }
+            })
         } else {
             print("Not authenticated")
             createAlert("Error", alertMessage: "Not authenticated")

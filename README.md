@@ -3,27 +3,46 @@ Sample application for communicating with OAuth 2.0 and OpenID Connect providers
 
 ## Running the Sample with your Okta Organization
 
-###Pre-requisites
-This sample application was tested with an Okta org. If you do not have an Okta org, you can easily [sign up for a free Developer Okta org](https://www.okta.com/developer/signup/).
+### Pre-requisites
+These steps require an Okta account - if you do not have one, sign up for a free developer organization [here](https://www.okta.com/developer/signup/).
 
-1. Verify OpenID Connect is enabled for your Okta organization. `Admin -> Applications -> Add Application -> Create New App -> OpenID Connect`
-  - If you do not see this option, email [developers@okta.com](mailto:developers@okta.com) to enable it.
-2. In the **Create A New Application Integration** screen, click the **Platform** dropdown and select **Native app only**
-3. Press **Create**. When the page appears, enter an **Application Name**. Press **Next**.
-4. Add the reverse DNS notation of your organization to the *Redirect URIs*, followed by a custom route. *(Ex: "com.oktapreview.example:/oauth")*
-5. Click **Finish** to redirect back to the *General Settings* of your application.
-6. Select the **Edit** button in the *General Settings* section to configure the **Allowed Grant Types**
-  - Ensure *Authorization Code* and *Refresh Token* are selected in **Allowed Grant Types**
-  - **Save** the application
-7. In the *Client Credentials* section verify *Proof Key for Code Exchange (PKCE)* is the default **Client Authentication**
-8. Copy the **Client ID**, as it will be needed for the `Models.swift` configuration file.
-9. Finally, select the **People** tab and **Assign to People** in your organization.
+1. Add an OpenID Connect Application:
+  - `Admin -> Applications -> Add Application -> Create New App -> Native app -> Create`
+  - If you **do not** see the `OpenID Connect` option, contact us at [developers@okta.com](mailto:developers@okta.com) to enable it
+2. Create an OpenID Connect application:
+
+    | Setting             | Value                                          |
+    | ------------------- | ---------------------------------------------- |
+    | Application Name    | OpenID Connect Mobile App                      |
+    | Redirect URIs       | `com.okta.applicationClientId://callback`      |
+    | Allowed grant types | Authorization Code, Refresh Token, Implicit    |
+
+3. Click **Finish** to redirect back to the *General Settings* of your application.
+4. In the *Client Credentials* section verify *Proof Key for Code Exchange (PKCE)* is the default **Client Authentication**
+5. Copy the **Client ID**, as it will be needed for the `Models.swift` configuration file.
+6. Create an OpenID Connect group:
+  - In the navigation bar, select **Directory** then **Groups**
+  - Select the `Add Group` button
+  - Enter the following information for your new group:
+  
+    | Setting           | Value                        | 
+    | ----------------- | ---------------------------- |
+    | Name              | OpenID Connect Group         |
+    | Group Description | OpenID Connect Samples Group |
+    
+7. Add new or existing users to your `OpenID Connect Group`:
+
+    | Name              | Username        | Password | Group                 |
+    | ----------------- | --------------- | -------- | --------------------- |
+    | George Washington | george@acme.com | Asdf1234 | OpenID Connect Group  |
+    | John Adams        | john@acme.com   | Asdf1234 | OpenID Connect Group  |
 
 ### Configure the Sample Application
 Once the project is cloned, install [AppAuth](https://github.com/openid/AppAuth-iOS) with [CocoaPods](https://guides.cocoapods.org/using/getting-started.html) by running the following from the project root.
 
-    pod install
-    
+```bash
+$ pod install
+```
 
 **Important:** Open `OpenIDConnectSwift.xcworkspace`. This file should be used to run/test your application.
 
@@ -39,6 +58,18 @@ class OktaConfiguration {
 }
 ```
 
+#### Updating the iOS Deep Link
+By default, the web browsers can open the application by visiting the unique URL `com.okta.applicationClientId://callback`. Update the URL by performing the following actions:
+
+1. Open `Info.plist` inside of `OpenIDConnectSwift.xcworkspace`
+2. Under **Information Property List**, select the arrow next to **URL types** to expand it
+3. Similarly, expand **Item 0** then **URL Schemes**
+4. Update `com.okta.applicationClientId` to the desired redirect URL
+5. Add the new redirect URL to your application's approved **Redirect URIs**
+
+Common practice is to use [reverse DNS notation](https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html) of your organization. 
+
+
 ## Running the Sample Application
 
 
@@ -46,7 +77,7 @@ class OktaConfiguration {
 | :-------------: |:-------------: |:-------------: |:-------------: |:-------------: |:-------------: |
 | ![Get Tokens](https://raw.githubusercontent.com/jmelberg/okta-openidconnect-appauth-sample-swift/master/OpenIDConnectSwift/Assets.xcassets/key_circle.imageset/key.png)| ![Get User Info](https://raw.githubusercontent.com/jmelberg/okta-openidconnect-appauth-sample-swift/master/OpenIDConnectSwift/Assets.xcassets/Reporting.imageset/Reporting.png)| ![Refresh Token](https://raw.githubusercontent.com/jmelberg/okta-openidconnect-appauth-sample-swift/master/OpenIDConnectSwift/Assets.xcassets/refresh.imageset/api_call.png)| ![Revoke Token](https://raw.githubusercontent.com/jmelberg/okta-openidconnect-appauth-sample-swift/master/OpenIDConnectSwift/Assets.xcassets/revoke.imageset/revoke.png) | ![Call API](https://raw.githubusercontent.com/jmelberg/okta-openidconnect-appauth-sample-swift/master/OpenIDConnectSwift/Assets.xcassets/refresh.imageset/api_call.png) | ![Clear Tokens](https://raw.githubusercontent.com/jmelberg/okta-openidconnect-appauth-sample-swift/master/OpenIDConnectSwift/Assets.xcassets/ic_key.imageset/MFA_for_Your_Apps.png)|
 
-###Get Tokens
+### Get Tokens
 Interacts with the Okta Authorization Server by using the discovered values from the organization's `https://example.oktapreview.com/.well-known/openid-configuration` endpoint. If the endpoint is found, AppAuth's `OIDAuthorizationRequest` method generates the request by passing in the required scopes and opening up an in-app Safari browser using `SFSafariViewController` to authenicate the user with Okta.
 
 If you want to customize the scopes requested by the mobile app, change the `scopes` parameter below.
@@ -87,7 +118,7 @@ If authenticated, the mobile app receives an `idToken`, `accessToken`, and `refr
 
 // Capture Authentication Response
 appDelegate.currentAuthorizationFlow =
-  OIDAuthState.authStateByPresentingAuthorizationRequest(request!, presentingViewController: self){
+  OIDAuthState.authStateByPresentingAuthorizationRequest(request, presentingViewController: self){
     authorizationResponse, error in
     
     if(authorizationResponse != nil){
@@ -102,7 +133,7 @@ appDelegate.currentAuthorizationFlow =
 
 ```
 
-###Get User Info
+### Get User Info
 If the user is authenticated, calling the [`/userinfo`](http://developer.okta.com/docs/api/resources/oidc#get-user-information) endpoint will retrieve user data. If received, the output is printed to the Debug area and a UIAlert.
 
 **NOTE:** Before calling the `/userinfo` endpoint, the `accessToken` is refreshed by AppAuth's `withFreshTokensPerformAction()` method. However, if the `accessToken` was previously **revoked**, the token will **not** be refreshed.
@@ -118,20 +149,18 @@ func sendUserInfoRequest(_ url: URL){
     if revoked { print("Performing request with revoked accessToken") }
     else {
       print("Performing request with fresh accessToken")
-      authState?.withFreshTokensPerformAction(){
-        accessToken, idToken, error in
-        
-        if(error != nil){
-          // Error
-        }
-        
-        if(token != accessToken){
+      authState?.performAction(freshTokens: {
+          accessToken, idToken, error in
+          if(error != nil){
+              print("Error fetching fresh tokens: \(error!.localizedDescription)")
+              return
+          }
           // Update accessToken
-          token = accessToken
-        } else {
-          print("Access token was fresh and not updated [\(token!)]")
-        }
-      }
+          if(token != accessToken){
+              print("Access token refreshed automatially (\(token) to \(accessToken!))")
+              token = accessToken
+          } else { print("Access token was fresh and not updated [\(token!)]") }
+      })
     }
 
     // Perform Request
@@ -141,7 +170,7 @@ func sendUserInfoRequest(_ url: URL){
     
 ```
 
-###Refresh Tokens
+### Refresh Tokens
 The AppAuth method `withFreshTokensPerformAction()` is used to refresh the current **access token** if the user is authenticated and the `setNeedsTokenRefresh` flag is set to `true`.
 ```swift
 // OktaAppAuth.swift
@@ -151,16 +180,16 @@ func refreshTokens(){
 
   if checkAuthState() {
     authState?.setNeedsTokenRefresh()
-    authState?.withFreshTokensPerformAction(){
-      accessToken, idToken, error in
-      
-      if(error != nil){
-        // Error
-        return
-      }
-      // accessToken
-      // idToken
-    }
+    authState?.performAction(freshTokens: {
+        accessToken, idToken, error in
+        if(error != nil){
+            // Error
+            return
+        }
+        // accessToken
+        // idToken
+
+    })
   }
   else {
     // Not authenticated
@@ -169,7 +198,7 @@ func refreshTokens(){
 
 ```
 
-###Revoke Tokens
+### Revoke Tokens
 If authenticated, the current `accessToken` is passed to the `/revoke` endpoint to be revoked.
 
 ```swift
@@ -178,7 +207,7 @@ If authenticated, the current `accessToken` is passed to the `/revoke` endpoint 
 func revokeToken(){
   if checkAuthState() {
     // Call revoke endpoint to terminate accessToken
-    authState?.withFreshTokensPerformAction(){
+    authState?.performAction(freshTokens: {
       accessToken, idToken, error in
       
       var request = URLRequest(url: url!)
@@ -194,18 +223,18 @@ func revokeToken(){
       ...
       
       self.revoked = true // Revoke toggle for calling User Info
-    }
+    })
   }
 }
 
 ```
 
-###Call API
+### Call API
 Passes the current access token *(fresh or revoked)* to a resource server for validation. Returns an api-specific details about the authenticated user.
 
 Currently, the [resource server](https://github.com/jmelberg/oauth-resource-server) is implemented with [node.js](https://nodejs.org/en/) and returns an image from [Gravatar API](https://en.gravatar.com/site/implement/). Please review the [setup information in the Resource Server README](https://github.com/jmelberg/oauth-resource-server/blob/master/README.md) for proper configuration.
 
-> Example Response
+#### Example Response
 
 ```swift
 // ImageViewController.swift
@@ -215,5 +244,5 @@ Currently, the [resource server](https://github.com/jmelberg/oauth-resource-serv
 }
 ```
 
-###Clear Tokens
+### Clear Tokens
 Sets the current `authState` to `nil` - clearing all tokens from AppAuth's cache.
