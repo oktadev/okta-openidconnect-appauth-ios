@@ -59,7 +59,7 @@ class OktaConfiguration {
 ```
 
 #### Updating the iOS Deep Link
-By default, the web browsers can open the application by visiting the unique URL `com.okta.applicationClientId://callback`. Update the URL by performing the following actions:
+By default, the web browsers can open the application by visiting the unique URL `com.okta.applicationclientid:/callback`. Update the URL by performing the following actions:
 
 1. Open `Info.plist` inside of `OpenIDConnectSwift.xcworkspace`
 2. Under **Information Property List**, select the arrow next to **URL types** to expand it
