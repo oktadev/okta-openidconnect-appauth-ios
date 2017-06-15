@@ -14,7 +14,7 @@ These steps require an Okta account - if you do not have one, sign up for a free
     | Setting             | Value                                          |
     | ------------------- | ---------------------------------------------- |
     | Application Name    | OpenID Connect Mobile App                      |
-    | Redirect URIs       | `com.okta.applicationClientId://callback`      |
+    | Redirect URIs       | `com.okta.applicationclientid:/callback`      |
     | Allowed grant types | Authorization Code, Refresh Token, Implicit    |
 
 3. Click **Finish** to redirect back to the *General Settings* of your application.
@@ -64,7 +64,7 @@ By default, the web browsers can open the application by visiting the unique URL
 1. Open `Info.plist` inside of `OpenIDConnectSwift.xcworkspace`
 2. Under **Information Property List**, select the arrow next to **URL types** to expand it
 3. Similarly, expand **Item 0** then **URL Schemes**
-4. Update `com.okta.applicationClientId` to the desired redirect URL
+4. Update `com.okta.applicationclientid` to the desired redirect URL
 5. Add the new redirect URL to your application's approved **Redirect URIs**
 
 Common practice is to use [reverse DNS notation](https://developer.apple.com/library/content/documentation/General/Conceptual/AppSearch/UniversalLinks.html) of your organization. 
@@ -210,10 +210,12 @@ func revokeToken(){
     authState?.performAction(freshTokens: {
       accessToken, idToken, error in
       
+      let url = URL(string: "\(self.appConfig.kIssuer!)/oauth2/v1/revoke")      
+
       var request = URLRequest(url: url!)
       request.httpMethod = "POST"
                 
-      let requestData = "token=\(accessToken!)&client_id=\(self.appConfig.kClientID)"
+      let requestData = "token=\(accessToken!)&client_id=\(self.appConfig.kClientID!)"
       request.httpBody = requestData.data(using: String.Encoding.utf8)
                 
       let config = URLSessionConfiguration.default

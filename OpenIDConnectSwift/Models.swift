@@ -28,7 +28,7 @@ class OktaConfiguration {
         kIssuer = "https://example.oktapreview.com"                        // Base url of Okta Developer domain
         kClientID = "applicationClientId"                                  // Client ID of Application
         apiEndpoint = URL(string: "https://example.com/protected")         // Resource Server URL
-        kRedirectURI = "com.okta.applicationClientId://callback"
+        kRedirectURI = "com.okta.applicationclientid:/callback"
         kAppAuthExampleAuthStateKey = "com.okta.openid.authState"
     }
 }

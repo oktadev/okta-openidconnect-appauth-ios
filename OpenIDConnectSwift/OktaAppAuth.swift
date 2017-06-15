@@ -171,11 +171,14 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
         OIDAuthorizationService.discoverConfiguration(forIssuer: issuer!) {
             config, error in
             
-            if ((config == nil)) {
-                print("Error retrieving discovery document: \(error?.localizedDescription)")
-                return
+
+            if config == nil {
+                print("Error retrieving discovery document: \(String(describing: error?.localizedDescription))")
+                return;
+            } else {
+                print("Retrieved configuration: \(config!)")
             }
-            print("Retrieved configuration: \(config!)")
+            
             
             // Build Authentication Request
             let request = OIDAuthorizationRequest(configuration: config!,
@@ -195,6 +198,8 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             
             print("Initiating Authorization Request: \(request)")
+            
+            
             appDelegate.currentAuthorizationFlow =
                 OIDAuthState.authState(byPresenting: request, presenting: self){
                     authorizationResponse, error in
@@ -255,7 +260,7 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                     }
                     // Update accessToken
                     if(token != accessToken){
-                        print("Access token refreshed automatially (\(token) to \(accessToken!))")
+                        print("Access token refreshed automatially (\(String(describing: token)) to \(accessToken!))")
                         token = accessToken
                     } else { print("Access token was fresh and not updated [\(token!)]") }
                 })
@@ -298,17 +303,17 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                                     errorResponse: jsonDictionaryOrArray as? [AnyHashable: Any],
                                     underlyingError: error)
                                 self.authState?.update(withAuthorizationError: oauthError!)
-                                self.createAlert("OAuth Error", alertMessage: "\(oauthError)")
+                                self.createAlert("OAuth Error", alertMessage: "\(String(describing: oauthError))")
                                 print("Authorization Error (\(oauthError!)). Response: \(responseText!)")
                             }
-                            else { print("HTTP: \(httpResponse.statusCode). Response: \(responseText)") }
+                            else { print("HTTP: \(httpResponse.statusCode). Response: \(String(describing: responseText))") }
                             return
                         }
                         print("Success: \(jsonDictionaryOrArray)")
                         self.createAlert(returnTitle, alertMessage: "\(jsonDictionaryOrArray)")
                     } catch {  print("Error while serializing data to JSON")  }
                 } else {
-                    print("Non-HTTP response \(error)")
+                    print("Non-HTTP response \(String(describing: error))")
                     return
                 }
             }
@@ -360,11 +365,11 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
             authState?.performAction(freshTokens: {
                 accessToken, idToken, error in
                 
-                let url = URL(string: "\(self.appConfig.kIssuer)/oauth2/v1/revoke")
+                let url = URL(string: "\(self.appConfig.kIssuer!)/oauth2/v1/revoke")
                 var request = URLRequest(url: url!)
                 request.httpMethod = "POST"
                 
-                let requestData = "token=\(accessToken!)&client_id=\(self.appConfig.kClientID)"
+                let requestData = "token=\(accessToken!)&client_id=\(self.appConfig.kClientID!)"
                 request.httpBody = requestData.data(using: String.Encoding.utf8)
                 
                 let config = URLSessionConfiguration.default
@@ -392,14 +397,14 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
                                                 errorResponse: jsonDictionaryOrArray as? [AnyHashable: Any],
                                                 underlyingError: error)
                                             self.authState?.update(withAuthorizationError: oauthError!)
-                                            print("Authorization Error (\(oauthError)). Response: \(responseText)")
+                                            print("Authorization Error (\(String(describing: oauthError))). Response: \(String(describing: responseText))")
                                         }
-                                        else{ print("HTTP: \(httpResponse.statusCode). Response: \(responseText)") }
+                                        else{ print("HTTP: \(httpResponse.statusCode). Response: \(String(describing: responseText))") }
                                         return
                                     }                                 }
                             } catch { print("Error while serializing data to JSON")  }
                         } else {
-                            print("Non-HTTP response \(error)")
+                            print("Non-HTTP response \(String(describing: error))")
                             return
                         }
                     }
@@ -455,5 +460,3 @@ class OktaAppAuth: UIViewController, OIDAuthStateChangeDelegate {
     }
 
 }
-
-
