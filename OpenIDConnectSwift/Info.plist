@@ -25,7 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.okta.applicationclientid</string>
+				<string>com.okta.example</string>
 			</array>
 		</dict>
 	</array>
